@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<form name="f1">
+	<table border="1" align="center" cellpadding="5" cellspacing="5">
+		<tr>
+			<td colspan="5"> &#38; <font color="red">&#9729;</font><input type="text" placeholder="0:00" name="t1"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="1" onclick="f1.t1.value+='1'"></td>
+			<td><input type="button" value="2" onclick="f1.t1.value+='2'"></td>
+			<td><input type="button" value="+" onclick="f1.t1.value+='+'"></td>
+			<td><input type="reset" value="c"></td>
+			<td><input type="button" value="=" onclick="f1.t1.value=eval(f1.t1.value)"></td>
+		</tr>
+	</table>
+</form>
+
+</body>
+</html>
