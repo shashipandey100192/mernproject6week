@@ -1,12 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 const myapp = express();
-require('dotenv').config();
+const myrouting = require('./routes/routing');
+
+require('@dotenvx/dotenvx').config()
+require('./database/db');
 const myport = process.env.SERVERPORT || 9600
 
-myapp.get("/",(req,res)=>{
-    res.send("welcome to expess jsooooooooooooooooooopppppppppppppppppp");
-});
+
+
+
+myapp.use(express.json());
+myapp.use(myrouting);
+myapp.use(cors());
+
+
+
 
 myapp.listen(myport,()=>{
     console.log(`app is runing: ${myport}`);
