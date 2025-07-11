@@ -1,3 +1,4 @@
+'Access-Control-Allow-Origin'
 const express = require('express');
 const cors = require('cors');
 const myapp = express();
@@ -11,8 +12,9 @@ const myport = process.env.SERVERPORT || 9600
 
 
 myapp.use(express.json());
-myapp.use(myrouting);
 myapp.use(cors());
+myapp.use(myrouting);
+
 
 
 
