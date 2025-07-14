@@ -1,23 +1,21 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import axios from 'axios'
 
 
 function Registorpage() {
+    const nav = useNavigate();
 const {register,handleSubmit,formState: { errors }} = useForm();
 const [a,xyz]=useState("block");
 
 const mysubmit = (d)=>{
     console.log(d)
-    console.log(d.pass);
-    if(d.pass.length==="kumar")
-    {
-        xyz("none");
-    }
-    else
-    {
-        xyz("block");
-    }
+    axios.post("http://localhost:5500/registoruser",d).then((u)=>{
+        console.log(u);
+        nav("/");
+
+    })
     
 
 }

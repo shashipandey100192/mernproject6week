@@ -21,6 +21,12 @@ myapp.get("/alluser", async(req,res)=>{
          res.json(users);
 });
 
+myapp.post("/registoruser", async (req,res)=>{
+    const {fullname,email,pass,cpass} = req.body;
+        const postdata = await myschima({fullname,email,pass,cpass}).save();
+        res.send({data:postdata,status:245});
+})  
+
 
 
 

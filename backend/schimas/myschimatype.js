@@ -8,16 +8,10 @@ const mydatapattern = mongoose.Schema({
     email:{
         type:String
     },
-    dob:{
-        type:String
-    },
-    phoneno:{
-        type:String
-    },
     pass:{
         type:String
     },
-    role:{
+    cpass:{
         type:String
     }    
 });
