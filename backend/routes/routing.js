@@ -25,7 +25,21 @@ myapp.post("/registoruser", async (req,res)=>{
     const {fullname,email,pass,cpass} = req.body;
         const postdata = await myschima({fullname,email,pass,cpass}).save();
         res.send({data:postdata,status:245});
-})  
+}) ;
+
+myapp.delete("/deletedata/:id", async(req,res)=>{
+        const id = req.params.id
+    const a = await myschima.findByIdAndDelete({_id:id});
+    res.send(200,{removedata:a,message:"remove successfully"});
+});
+
+
+myapp.get("/singleuser/:id", async(req,res)=>{
+    const id = req.params.id;
+        const a = await myschima.findById({_id:id});
+         res.send(200,{removedata:a,message:" get single user successfully"});
+
+})
 
 
 

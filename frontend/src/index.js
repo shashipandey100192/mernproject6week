@@ -20,6 +20,7 @@ import Mainbranch from './modules/dashboard/components/Mainbranch';
 import { Provider } from 'react-redux';
 import { Mystore } from './reduxpage/Mystore';
 import Reduxpage from './reduxpage/Reduxpage';
+import ViewDetailspage from './modules/dashboard/components/ViewDetailspage';
 // import Mylazypage from './modules/dashboard/components/Mylazypage';
 const Mylazypage = lazy(()=>import('./modules/dashboard/components/Mylazypage'));
 
@@ -37,6 +38,8 @@ root.render(
           <Route path='' element={<Mainpage/>}></Route>
           <Route path='home' element={<Homepage/>}></Route>
           <Route path='about' element={<Aboutpage/>}></Route>
+          <Route path='about/viewdetails/:id' element={<ViewDetailspage/>}></Route>
+          
           <Route path='contact' element={<Contactpage/>}></Route>
             <Route path='productlist' element={<Productlistpage/>}></Route>
             <Route path='productlist/detailspage/:id' element={<Productdetailspage/>}></Route>
