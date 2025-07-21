@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { apiroot } from '../../../service/Myapi'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
+import {toast,ToastContainer} from 'react-toastify';
 
 function Aboutpage() {
   const [user, updateuser] = useState([]);
@@ -21,7 +22,16 @@ const deleteuser = (id)=>
 {
   axios.delete(`${apiroot}/deletedata/${id}`).then((d)=>{
     console.log(d);
-    getallusers();
+    const b = d.data.status;
+        if(b===370)
+        {
+          toast.success("this data is removed",{autoClose:2000});
+           setTimeout(()=>{
+            getallusers();
+           },2000);
+        }
+      
+   
   })
 
 }
@@ -34,6 +44,7 @@ const deleteuser = (id)=>
       <div className='row'>
         <div className='col-12 mt-3'>
           <h4>List Of Users: - </h4>
+          <ToastContainer></ToastContainer>
           <table class="table table-bordered border-primary">
             <thead>
               <tr>
@@ -52,7 +63,7 @@ const deleteuser = (id)=>
                     <td>{d.email}</td>
                     <td>
                         <Link to={`viewdetails/`+d._id} className='btn btn-info btn-sm ms-2'>View</Link>
-                        <Link to="" className='btn btn-warning btn-sm ms-2'>Edit</Link>
+                        <Link to={`edituser/`+d._id} className='btn btn-warning btn-sm ms-2'>Edit</Link>
                         <button className='btn btn-danger btn-sm ms-2' onClick={()=>deleteuser(d._id)}>Del</button>
                       
                        </td>

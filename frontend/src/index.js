@@ -21,8 +21,10 @@ import { Provider } from 'react-redux';
 import { Mystore } from './reduxpage/Mystore';
 import Reduxpage from './reduxpage/Reduxpage';
 import ViewDetailspage from './modules/dashboard/components/ViewDetailspage';
+import Edituserpage from './modules/dashboard/components/Edituserpage';
 // import Mylazypage from './modules/dashboard/components/Mylazypage';
 const Mylazypage = lazy(()=>import('./modules/dashboard/components/Mylazypage'));
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -39,6 +41,7 @@ root.render(
           <Route path='home' element={<Homepage/>}></Route>
           <Route path='about' element={<Aboutpage/>}></Route>
           <Route path='about/viewdetails/:id' element={<ViewDetailspage/>}></Route>
+          <Route path='about/edituser/:id' element={<Edituserpage/>}></Route>
           
           <Route path='contact' element={<Contactpage/>}></Route>
             <Route path='productlist' element={<Productlistpage/>}></Route>

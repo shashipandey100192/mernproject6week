@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios'
+import {toast,ToastContainer} from 'react-toastify';
 
 
 function Registorpage() {
@@ -13,7 +14,10 @@ const mysubmit = (d)=>{
     console.log(d)
     axios.post("http://localhost:5500/registoruser",d).then((u)=>{
         console.log(u);
-        nav("/");
+        toast.success("user successfully registor",{autoClose:2000});
+        setTimeout(()=>{
+             nav("/");
+        },2000);
 
     })
     
@@ -26,6 +30,7 @@ const mysubmit = (d)=>{
             <div class="register-container">
                 <form class="register-form" onSubmit={handleSubmit(mysubmit)}>
                     <h2>Create Account</h2>
+                    <ToastContainer></ToastContainer>
                     <div class="input-group">
                         <label for="name">Full Name</label>
                         <input type="text" {...register("fullname",{required:true})}/>

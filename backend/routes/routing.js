@@ -30,16 +30,48 @@ myapp.post("/registoruser", async (req,res)=>{
 myapp.delete("/deletedata/:id", async(req,res)=>{
         const id = req.params.id
     const a = await myschima.findByIdAndDelete({_id:id});
-    res.send(200,{removedata:a,message:"remove successfully"});
+    res.send({removedata:a,message:"remove successfully",status:370});
 });
 
 
 myapp.get("/singleuser/:id", async(req,res)=>{
     const id = req.params.id;
         const a = await myschima.findById({_id:id});
-         res.send(200,{removedata:a,message:" get single user successfully"});
+         res.send(a);
 
 })
+
+
+myapp.patch("/updateuser/:id", async(req,res)=>{
+    const id = req.params.id;
+        console.log(id);
+        const a = await myschima.findByIdAndUpdate(id,req.body,{new:true});
+        res.send({user:a,message:"update successfully",status:376});
+
+});
+
+myapp.post("/loginpage",async (req,res)=>{
+    const {email,pass} = req.body;
+    if(email==="" || pass==="")
+    {
+        res.send({msg:"email or password is blank",status:420});
+    }
+    else
+    {
+        const users = await myschima.findOne({email:email});
+        if(users)
+        {
+            res.send({msg:"user found",status:450});
+        }
+        else
+        {
+            res.send({msg:"user not found",status:302});
+        }
+    }
+})
+
+
+
 
 
 
