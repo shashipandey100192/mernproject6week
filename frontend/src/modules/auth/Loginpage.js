@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
- import { ToastContainer, toast } from 'react-toastify';
- import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { apiroot } from '../../service/Myapi';
 
 
 
@@ -10,55 +12,78 @@ import { Link, useNavigate } from 'react-router-dom'
 function Loginpage() {
   const count = useSelector((state) => state.counter.value);
 
-const [user, setuser]=useState("abc");
-const [pass, setpass]=useState("123");
-const nav = useNavigate();
+  const [email, setuser] = useState("abc");
+  const [pass, setpass] = useState("123");
+  const nav = useNavigate();
 
 
-  const userfunc=(ele)=>{
-      console.log(ele.target.value);
-      setuser(ele.target.value);
+  const userfunc = (ele) => {
+    console.log(ele.target.value);
+    setuser(ele.target.value);
   }
 
-    const passfunc=(ele)=>{
-      console.log(ele.target.value);
-      setpass(ele.target.value)
+  const passfunc = (ele) => {
+    console.log(ele.target.value);
+    setpass(ele.target.value)
   }
 
-  const login = ()=>{
-      if(user==="admin" && pass==="123")
-      {
-       toast.success("successfully login",{position: "top-left",autoClose: 1000,theme: "dark"});
-       setTimeout(()=>{
-        nav("/dashboard");
-       },1000);
-        
+  const login = async () => {
+
+    await axios.post(`${apiroot}/loginpage`, { email, pass }).then((d) => {
+
+      console.log(d);
+      if (d.data.status === 450) {
+        toast.success(d.data.msg, { position: "top-left", autoClose: 1000, theme: "dark" });
+        setTimeout(() => {
+          nav("/dashboard");
+        }, 1000);
       }
-      else
-      {
-         toast.error("Error Login",{position: "top-left",autoClose: 2000,theme: "dark"});
+
+      if (d.data.status === 420) {
+        toast.warning(d.data.msg, { position: "top-left", autoClose: 1000, theme: "dark" });
       }
+      if (d.data.status === 460) {
+        toast.warning(d.data.msg, { position: "top-left", autoClose: 1000, theme: "dark" });
+      }
+      if (d.data.status === 302) {
+        toast.warning(d.data.msg, { position: "top-left", autoClose: 1000, theme: "dark" });
+      }
+    })
+
+
+    // if(user==="admin" && pass==="123")
+    // {
+    //  toast.success("successfully login",{position: "top-left",autoClose: 1000,theme: "dark"});
+    //  setTimeout(()=>{
+    //   nav("/dashboard");
+    //  },1000);
+
+    // }
+    // else
+    // {
+    //    toast.error("Error Login",{position: "top-left",autoClose: 2000,theme: "dark"});
+    // }
   }
 
   return (
     <div className='mylogin'>
-    <div className="login-container">
-    <form className="login-form">
-      <h2>Login</h2>
-      <ToastContainer/>
-      <div className="input-group">
-        <label for="email">Email {count}</label>
-        <input type="email" id="email" required  onInput={userfunc} value={user}/>
+      <div className="login-container">
+        <form className="login-form">
+          <h2>Login</h2>
+          <ToastContainer />
+          <div className="input-group">
+            <label for="email">Email {count}</label>
+            <input type="email" id="email" required onInput={userfunc} value={email} />
+          </div>
+          <div className="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required onInput={passfunc} value={pass} />
+          </div>
+          <button type="button" className='btn btn-success' onClick={login}>Login</button>
+          <p className="signup-link">Don't have an account? <Link to="registor">Sign up</Link></p>
+        </form>
       </div>
-      <div className="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" required onInput={passfunc} value={pass}/>
-      </div>
-      <button type="button" className='btn btn-success' onClick={login}>Login</button>
-      <p className="signup-link">Don't have an account? <Link to="registor">Sign up</Link></p>
-    </form>
-  </div>
-  </div>
+    </div>
   )
 }
 

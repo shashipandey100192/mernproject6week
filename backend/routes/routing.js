@@ -61,7 +61,15 @@ myapp.post("/loginpage",async (req,res)=>{
         const users = await myschima.findOne({email:email});
         if(users)
         {
-            res.send({msg:"user found",status:450});
+            if(users.email===email && users.pass===pass)
+            {
+                res.send({msg:"user found successfully",status:450});
+            }
+            else
+            {
+                res.send({msg:"email and password don't match",status:460});
+            }
+            
         }
         else
         {
