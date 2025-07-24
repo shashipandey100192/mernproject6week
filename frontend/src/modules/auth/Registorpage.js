@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios'
 import {toast,ToastContainer} from 'react-toastify';
+import { apiroot } from '../../service/Myapi';
 
 
 function Registorpage() {
@@ -11,8 +12,8 @@ const {register,handleSubmit,formState: { errors }} = useForm();
 const [a,xyz]=useState("block");
 
 const mysubmit = (d)=>{
-    console.log(d)
-    axios.post("http://localhost:5500/registoruser",d).then((u)=>{
+    
+    axios.post(`${apiroot}/registoruser`,d).then((u)=>{
         console.log(u);
         toast.success("user successfully registor",{autoClose:2000});
         setTimeout(()=>{
