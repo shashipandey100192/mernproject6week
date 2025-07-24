@@ -16,7 +16,7 @@ myapp.get("/about",(req,res)=>{
 
 myapp.get("/alluser", async(req,res)=>{
         const users = await myschima.find();
-        console.log(users);
+        
         // res.json({datas:users,status:240,message:"all userlist"});
          res.json(users);
 });
@@ -44,7 +44,7 @@ myapp.get("/singleuser/:id", async(req,res)=>{
 
 myapp.patch("/updateuser/:id", async(req,res)=>{
     const id = req.params.id;
-        console.log(id);
+        
         const a = await myschima.findByIdAndUpdate(id,req.body,{new:true});
         res.send({user:a,message:"update successfully",status:376});
 
