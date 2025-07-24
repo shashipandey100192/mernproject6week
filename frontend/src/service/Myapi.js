@@ -1,7 +1,7 @@
 
 // local 
-export const apiroot = "http://localhost:5500";
+// export const apiroot = "http://localhost:5500";
 
 // production  
-// export const apiroot = "";
+export const apiroot = "https://mernproject6week.onrender.com/";
 
